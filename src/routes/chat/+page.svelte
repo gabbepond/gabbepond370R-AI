@@ -116,7 +116,7 @@
 	}
 </script>
 
-<main class="flex min-h-screen w-screen flex-col items-center bg-primary-50-950">
+<main class="flex min-h-screen w-screen flex-col items-center bg-purple-300">
 	<!-- The app bar for this page -->
 	<ChatAppBar
 		bind:selectedSystemPrompt={systemPrompt}
@@ -128,11 +128,11 @@
 		<FileUploadAside />
 		<form
 			onsubmit={handleSubmit}
-			class="m-4 flex flex-col rounded-md border-2 border-primary-500 p-2"
+			class="m-4 flex flex-col rounded-xxl border-2 border-black p-2"
 		>
 			<div class="space-y-4">
 				<div class="flex space-x-2">
-					<Avatar src="/img-tutor-girl.png" name="Tutor girl image" />
+					<Avatar src="/teacher-avatar.png" name="Teacher" />
 					<div class="assistant-chat">Hello! How can I help you?</div>
 				</div>
 				<!-- Need to display each chat item here -->
@@ -140,7 +140,7 @@
 					{#if chat.role === 'user'}
 						<div class="ml-auto flex justify-end">
 							<div>
-								<Avatar src="/PikaThorAnime.png" name="User image" />
+								<Avatar src="/gabbe-avatar.webp" name="User image" />
 							</div>
 							<div class="user-chat">
 								{chat.content}
@@ -150,7 +150,7 @@
 					{:else}
 						<div class="mr-auto flex">
 							<div>
-								<Avatar src="/img-tutor-girl.png" name="Tutor girl image" />
+								<Avatar src="/teacher-avatar.png" name="Teacher image" />
 							</div>
 							<div class="assistant-chat">
 								{@html chat.content}
@@ -163,7 +163,7 @@
 					{#await new Promise((res) => setTimeout(res, 400)) then _}
 						<div class="flex">
 							<div class="flex space-x-2">
-								<Avatar name="tutor girl image" src={'/img-tutor-girl.png'} />
+								<Avatar name="tutor girl image" src={'/img-gabbe-avatar.webp'} />
 								<div class="assistant-chat">
 									{#if response.text === ''}
 										<TypingIndicator />
