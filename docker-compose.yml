@@ -25,3 +25,5 @@ services:
 volumes:
   weaviate_data:
   uploads_data:
+
+  # commit
