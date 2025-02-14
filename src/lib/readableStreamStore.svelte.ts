@@ -31,7 +31,7 @@ export function readableStreamStore() {
             text = "";
             
             return finaltext;
-        } catch (err: any) {
+        } catch (err: unknown) {
             loading = false;
             text = err.toString();
             throw err;
@@ -44,4 +44,3 @@ export function readableStreamStore() {
         request
     };
 }
-// commit
