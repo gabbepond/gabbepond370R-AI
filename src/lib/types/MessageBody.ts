@@ -7,5 +7,5 @@ export interface MessageBody {
     chats: Message[];
     systemPrompt: string;
     deepSeek: boolean;
+    fileNames?: string[];
 }
-// commit

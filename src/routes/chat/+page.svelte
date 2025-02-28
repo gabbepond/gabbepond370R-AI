@@ -7,6 +7,7 @@
 	import DOMPurify from 'dompurify';
 	import ChatAppBar from '$lib/components/ChatAppBar.svelte';
 	import FileUploadAside from '$lib/components/FileUploadAside.svelte';
+	import { CircleX } from 'lucide-svelte'
 
 	import hljs from 'highlight.js';
 	import javascript from 'highlight.js/lib/languages/javascript';
@@ -25,14 +26,25 @@
 			}
 		})
 	)
+	interface PageData {
+		fileNames?: string[];
+	}
+
+	let { data } = $props<{ data: PageData }>()
 
 	let systemPrompt = $state('');
 	let examplePrompt = $state('');
 	let deepSeek = $state(false);
+	let fileNames = $state([] as string[])
 
 	let chatHistory = $state(
 		typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('chatHistory') || '[]') : []
 	);
+	$effect(() => {
+		if (data?.fileNames) {
+			fileNames = [...data.fileNames]
+		}
+	})
 
 	$effect(() => {
 		if (typeof window !== 'undefined') {
@@ -86,7 +98,8 @@
 					body: JSON.stringify({
 						chats: chatHistory,
 						systemPrompt,
-						deepSeek
+						deepSeek,
+						fileNames
 					})
 				})
 			);
@@ -113,6 +126,11 @@
 
 	function deleteAllChats() {
 		chatHistory = [];
+	}
+
+	function deleteFileName(fileName: string) {
+		// Update the local state instead of the prop
+		fileNames = fileNames.filter((name) => name !== fileName)
 	}
 </script>
 
@@ -195,6 +213,26 @@
 					</div>
 				</div>
 			</div>
+			<div class="flex w-full flex-col items-center">
+				<p class="text-center text-sm text-surface-500">
+					You can also upload a file for additional context to chat with me. I will do my best to
+					help you.
+				</p>
+				{#if fileNames.length > 0}
+					<div class="flex items-center gap-4">
+						{#each fileNames as fileName}
+							<div class="flex items-center gap-2">
+								<button
+									type="button"
+									class="btn preset-filled-primary-500">
+									<span>{fileName}</span>
+									<CircleX onclick={() => deleteFileName(fileName)} />
+								</button>
+							</div>
+						{/each}
+					</div>
+				{/if}
+			</div>
 		</form>
 	</div>
 </main>
@@ -245,4 +283,3 @@
 		}
 	}
 </style>
-<!-- Gabbe changes -->

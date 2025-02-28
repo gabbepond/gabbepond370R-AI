@@ -5,6 +5,9 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import { pipeline } from 'stream/promises'
 import fs from 'fs'
+import type { WeaviateClient } from 'weaviate-client';
+import weaviate from 'weaviate-client';
+import type { ChunkObject } from '$lib/types/ChunkObject';
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
