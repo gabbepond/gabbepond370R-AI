@@ -20,7 +20,7 @@ async function connectToWeaviate(): Promise<WeaviateClient> {
 		grpcHost: 'localhost',
 		grpcPort: 50051,
 		headers: {
-			'X-OpenAI-Api-Key': process.env.OPENAI_API_KEY as string
+			"X-OpenAI-Api-Key": process.env.OPENAI_API_KEY as string
 		}
 	})
 	return clientPromise

@@ -8,6 +8,7 @@
 	import ChatAppBar from '$lib/components/ChatAppBar.svelte';
 	import FileUploadAside from '$lib/components/FileUploadAside.svelte';
 	import { CircleX } from 'lucide-svelte'
+	
 
 	import hljs from 'highlight.js';
 	import javascript from 'highlight.js/lib/languages/javascript';
@@ -123,6 +124,7 @@
 			console.error(error);
 		}
 	}
+	
 
 	function deleteAllChats() {
 		chatHistory = [];
@@ -134,7 +136,7 @@
 	}
 </script>
 
-<main class="flex min-h-screen w-screen flex-col items-center bg-purple-300">
+<main class="flex min-h-screen w-screen flex-col items-center bg-pink-100">
 	<!-- The app bar for this page -->
 	<ChatAppBar
 		bind:selectedSystemPrompt={systemPrompt}
@@ -181,7 +183,7 @@
 					{#await new Promise((res) => setTimeout(res, 400)) then _}
 						<div class="flex">
 							<div class="flex space-x-2">
-								<Avatar name="tutor girl image" src={'/img-gabbe-avatar.webp'} />
+								<Avatar name="gabbe avatar image" src={'/img-gabbe-avatar.webp'} />
 								<div class="assistant-chat">
 									{#if response.text === ''}
 										<TypingIndicator />
@@ -205,8 +207,8 @@
 							bind:value={examplePrompt}
 						></textarea>
 						<div class="flex flex-col justify-between">
-							<button type="submit" class="btn preset-filled-primary-500">Send</button>
-							<button type="button" class="btn preset-filled-secondary-500" onclick={deleteAllChats}
+							<button type="submit" class="bg-cyan-600 text-white pb-2">Send</button>
+							<button type="button" class="bg-red-600 text-white" onclick={deleteAllChats}
 								>Clear Chats</button
 							>
 						</div>
@@ -214,7 +216,7 @@
 				</div>
 			</div>
 			<div class="flex w-full flex-col items-center">
-				<p class="text-center text-sm text-surface-500">
+				<p class="text-center text-sm text-surface-500 ">
 					You can also upload a file for additional context to chat with me. I will do my best to
 					help you.
 				</p>
@@ -224,7 +226,7 @@
 							<div class="flex items-center gap-2">
 								<button
 									type="button"
-									class="btn preset-filled-primary-500">
+									class="btn preset-filled-primary-500 ">
 									<span>{fileName}</span>
 									<CircleX onclick={() => deleteFileName(fileName)} />
 								</button>
@@ -235,6 +237,8 @@
 			</div>
 		</form>
 	</div>
+
+	
 </main>
 
 <style lang="postcss">
